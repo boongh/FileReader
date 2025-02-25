@@ -21,9 +21,15 @@
     <ClInclude Include="include\FileHeaders.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\FileWriter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\FileReader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\FileWriter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

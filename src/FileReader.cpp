@@ -18,7 +18,7 @@ namespace FileReader {
 	/// </summary>
 	/// <param name="filename"></param>
 	/// <returns></returns>
-	WAVFormat readWAV(const char* filename) {
+	WAVFormat readWAV(const std::string& filename) {
 		try {
 			WAVFormat wav;
 			std::ifstream file(filename, std::ios::binary | std::ios::ate);
@@ -37,10 +37,15 @@ namespace FileReader {
 
 			file.seekg(0, std::ios::beg);
 
-			wav.data.resize(static_cast<size_t>(bufferSize - sizeof(WAVFormat)));
 
-			if (!file.read(reinterpret_cast<char*>(wav.data.data()), bufferSize)) {
-				cerr << "Error reading the file." << std::endl;
+			//Read the header
+			file.read(reinterpret_cast<char*>(&wav.header), sizeof(WAVHeader));
+
+			size_t numSamples = (bufferSize  - sizeof(WAVHeader)) / sizeof(int16_t);
+			wav.data.resize(numSamples);
+
+			if (!file.read(reinterpret_cast<char*>(wav.data.data()), bufferSize - sizeof(WAVHeader))) {
+				cerr << "Error reading the file : " << filename << std::endl;
 				return wav;
 
 			}
