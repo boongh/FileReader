@@ -131,11 +131,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="include\FileHeaders.h" />
+    <ClInclude Include="include\FileFormats.h" />
     <ClInclude Include="include\FileReader.h" />
     <ClInclude Include="include\FileWriter.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\FileFormats.cpp" />
     <ClCompile Include="src\FileReader.cpp" />
     <ClCompile Include="src\FileWriter.cpp" />
   </ItemGroup>

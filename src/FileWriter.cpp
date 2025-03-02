@@ -1,11 +1,8 @@
 #include "FileWriter.h"
-#include "FileHeaders.h"
+#include "FileReader.h"
+#include "FileFormats.h"
 #include <fstream>
 #include <iostream>
-
-
-#ifndef FILE_WRITER
-#define FILE_WRITER
 
 namespace FileWriter {
 	/// <summary>
@@ -13,12 +10,11 @@ namespace FileWriter {
 	/// </summary>
 	/// <param name="filename"></param>
 	/// <param name="wav"></param>
-	void writeWAV(const std::string& filename, const WAVFormat& wav) {
+	WAVFormat WriteWAV(const std::string& filename, const WAVFormat& wav) {
 		try {
 			std::ofstream file(filename, std::ios::binary);
 			if (!file) {
-				std::cerr << "Failed to open file\n";
-				return;
+				throw std::exception("Failed to open file");
 			}
 
 			
@@ -27,6 +23,8 @@ namespace FileWriter {
 
 			file.write(reinterpret_cast<const char*>(wav.data.data()), wav.data.size() * sizeof(int16_t));
 			file.close();
+
+			return FileReader::ReadWAV(filename);
 		}
 		catch (const std::exception& e) {
 			std::cout << "Unable to write file" << e.what() << "\n";
@@ -34,4 +32,3 @@ namespace FileWriter {
 	}
 }
 
-#endif // !FILE_WRITER

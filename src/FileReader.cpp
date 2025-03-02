@@ -1,25 +1,21 @@
-#include "FileHeaders.h"
+#include "FileFormats.h"
 #include "FileReader.h"
 #include <vector>
 #include <complex>
 #include <fstream>
 #include <iostream>
 
-
-#ifndef FILE_READER
-#define FILE_READER
-
-
 using namespace std;
 namespace FileReader {
 
 	/// <summary>
-	/// Read Wav file format
+	/// Read Wav file
 	/// </summary>
 	/// <param name="filename"></param>
 	/// <returns></returns>
-	WAVFormat readWAV(const std::string& filename) {
+	WAVFormat ReadWAV(const std::string& filename) {
 		try {
+			//Parse file into WAVFormat struct
 			WAVFormat wav;
 			std::ifstream file(filename, std::ios::binary | std::ios::ate);
 
@@ -28,6 +24,7 @@ namespace FileReader {
 				return wav;
 			}
 
+			//Size of the file
 			streamoff bufferSize = file.tellg();
 
 			if (bufferSize < 0) {
@@ -35,15 +32,19 @@ namespace FileReader {
 				return wav;
 			}
 
+
+			//Ensure reader head is at the start
 			file.seekg(0, std::ios::beg);
 
 
 			//Read the header
 			file.read(reinterpret_cast<char*>(&wav.header), sizeof(WAVHeader));
 
-			size_t numSamples = (bufferSize  - sizeof(WAVHeader)) / sizeof(int16_t);
-			wav.data.resize(numSamples);
 
+			//Number of samples = filesize - size of header after chunksize(44 - 8) / size of sample (2 bytes)
+			wav.data.resize((wav.header.chunkSize - 36) >> 1);
+
+			//Read data into header
 			if (!file.read(reinterpret_cast<char*>(wav.data.data()), bufferSize - sizeof(WAVHeader))) {
 				cerr << "Error reading the file : " << filename << std::endl;
 				return wav;
@@ -59,5 +60,3 @@ namespace FileReader {
 	}
 
 }
-
-#endif // !FILE_READER

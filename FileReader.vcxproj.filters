@@ -18,7 +18,7 @@
     <ClInclude Include="include\FileReader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\FileHeaders.h">
+    <ClInclude Include="include\FileFormats.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\FileWriter.h">
@@ -30,6 +30,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\FileWriter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\FileFormats.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
