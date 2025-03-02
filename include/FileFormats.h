@@ -64,12 +64,10 @@ struct WAVHeader : Header {
 };
 #pragma pack(pop)
 
+
+#pragma pack(push, 1)
 struct WAVFormat : File {
 
-    WAVFormat(vector<uint16_t>);
-
-	//Blank constructor
-    WAVFormat();
 
     //Header
     WAVHeader header;
@@ -77,13 +75,18 @@ struct WAVFormat : File {
     //Actual audio data
     vector<uint16_t> data;		//Actual audio data
 
+    WAVFormat(vector<uint16_t>);
+
+	//Blank constructor
+    WAVFormat();
+
     //Operator overloading
 	bool operator == (const WAVFormat& b) const;
     bool operator != (const WAVFormat& b) const;
 
     void GenerateHeader(int samplerate, int numberChannel);
 };
-
+#pragma pack(pop)
 
 #pragma endregion
 
