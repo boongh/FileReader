@@ -16,8 +16,8 @@ namespace FileWriter
 	WAVFormat WriteWAV(const std::string& filename, const WAVFormat& bufferWrite);
 	void WriteCSV(const std::string& filename, std::unordered_map<std::string, std::string> csvMap);
 
-	void WriteText(const std::string& filename, std::vector<double> write);
-	void WriteText(const std::string& filename, std::vector<std::complex<double>> write, bool writeMagnitude);
+	void WriteText(const std::string& filename, std::vector<double>& write);
+	void WriteText(const std::string& filename, const std::vector<std::complex<double>>& write, bool writeMagnitude);
 }
 
 #endif // !FILE_WRITER

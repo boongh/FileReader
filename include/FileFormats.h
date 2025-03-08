@@ -36,11 +36,6 @@ struct File {
 
 #pragma region WAVFormat
 
-using namespace std;
-
-
-
-
 //WAV file format header
 #pragma pack(push, 1) // Ensure no padding in WAVHeader
 struct WAVHeader : Header {
@@ -73,9 +68,9 @@ struct WAVFormat : File {
     WAVHeader header;
 
     //Actual audio data
-    vector<uint16_t> data;		//Actual audio data
+    std::vector<uint16_t> data;		//Actual audio data
 
-    WAVFormat(vector<uint16_t>);
+    WAVFormat(std::vector<uint16_t>);
 
 	//Blank constructor
     WAVFormat();

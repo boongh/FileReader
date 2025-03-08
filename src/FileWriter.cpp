@@ -37,19 +37,25 @@ namespace FileWriter {
 	}
 
 
-	void WriteCSV(const std::string& filename, unordered_map<string, string> csvMap)
-	{
-		try {
-			std::ofstream file(filename, std::ios::binary);
-			if (!file) {
-				throw std::exception("Failed to open file to write");
-			}
-		}
-		catch (const std::exception& e) {
-			std::cout << "Unable to write file" << e.what() << "\n";
-		}
-	}
-	void WriteText(const std::string& filename, std::vector<double> write)
+    void WriteCSV(const std::string& filename, std::unordered_map<std::string, std::string>& csvMap)
+    {
+        try {
+            std::ofstream file(filename);
+            if (!file) {
+                throw std::exception("Failed to open file to write");
+            }
+
+            for (const auto& pair : csvMap) {
+                file << pair.first << "," << pair.second << "\n";
+            }
+
+            file.close();
+        }
+        catch (const std::exception& e) {
+            std::cout << "Unable to write file: " << e.what() << "\n";
+        }
+    }
+	void WriteText(const std::string& filename, std::vector<double>& write)
 	{
 		try {
 			std::ofstream file(filename, std::ios::binary);
@@ -57,7 +63,7 @@ namespace FileWriter {
 				throw std::runtime_error("Failed to open file to write");
 			}
 			for (int i = 0; i < write.size(); i++) {
-				file << i << ", " << write[i] << "\n";
+				file << write[i] << "\n";
 			}
 
 			file.close();
@@ -67,7 +73,7 @@ namespace FileWriter {
 		}
 	}
 
-	void WriteText(const std::string& filename, std::vector<std::complex<double>> write, bool writeMagnitude)
+	void WriteText(const std::string& filename, const std::vector<std::complex<double>>& write, bool writeMagnitude)
 	{
 		try {
 			std::ofstream file(filename, std::ios::binary);
@@ -77,12 +83,12 @@ namespace FileWriter {
 
 			if (!writeMagnitude) {
 				for (int i = 0; i < write.size(); i++) {
-					file << i << ", " << write[i] << "\n";
+					file << write[i] << "\n";
 				}
 			}
 			else {
 				for (int i = 0; i < write.size(); i++) {
-					file << i << ", " << abs(write[i]) << "\n";
+					file << abs(write[i]) << "\n";
 				}
 			}
 
@@ -92,5 +98,4 @@ namespace FileWriter {
 			std::cout << "Unable to write file: " << e.what() << "\n";
 		}
 	}
-}
-
+}	
