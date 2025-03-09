@@ -62,7 +62,7 @@ WAVFormat::WAVFormat() {
 	GenerateHeader(0, 1);
 }
 
-WAVFormat::WAVFormat(std::vector<uint16_t> d) {
+WAVFormat::WAVFormat(std::vector<int16_t> d) {
 	data = d;
 	GenerateHeader(0, 1);
 }

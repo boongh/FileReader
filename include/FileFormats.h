@@ -68,9 +68,9 @@ struct WAVFormat : File {
     WAVHeader header;
 
     //Actual audio data
-    std::vector<uint16_t> data;		//Actual audio data
+    std::vector<int16_t> data;		//Actual audio data
 
-    WAVFormat(std::vector<uint16_t>);
+    WAVFormat(std::vector<int16_t>);
 
 	//Blank constructor
     WAVFormat();
