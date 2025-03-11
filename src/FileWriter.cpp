@@ -10,31 +10,37 @@ namespace FileWriter {
 	/// </summary>
 	/// <param name="filename"></param>
 	/// <param name="wav"></param>
-	WAVFormat WriteWAV(const std::string& filename, const WAVFormat& bufferWrite) {
-		try {
-			std::ofstream file(filename, std::ios::binary);
-			if (!file) {
-				throw std::exception("Failed to open file");
-			}
-			
-			//Write the header
-			if (!file.write(reinterpret_cast<const char*>(&bufferWrite.header), sizeof(WAVHeader))) {
-				std::cerr << "Failt to write file header" << "\n";
-			}
+    WAVFormat WriteWAV(const std::string& filename, const WAVFormat& bufferWrite) {
+        try {
+            std::ofstream file(filename, std::ios::binary);
+            if (!file) {
+                throw std::exception("Failed to open file");
+            }
+            
+            std::cout << filename << " : writing\n";
+            std::cout << "Datapoint : " << bufferWrite.data.size() << "\n";
+            std::cout << "Size of a point : " << sizeof(bufferWrite.data[0]) << "\n";
+            std::cout << "Sample rate : " << bufferWrite.header.sampleRate << "\n";
+            std::cout << "Channels : " << bufferWrite.header.numChannels << "\n";
+            
+            // Write the header
+            if (!file.write(reinterpret_cast<const char*>(&bufferWrite.header), sizeof(WAVHeader))) {
+                std::cerr << "Failed to write file header" << "\n";
+            }
 
-			//Write the data
-			if (!file.write(reinterpret_cast<const char*>(bufferWrite.data.data()), bufferWrite.data.size()  / sizeof(uint16_t))) {
-				std::cerr << "Failt to write file header" << "\n";
-			}
+            // Write the data
+            if (!file.write(reinterpret_cast<const char*>(bufferWrite.data.data()), bufferWrite.data.size() * sizeof(int16_t))) {
+                std::cerr << "Failed to write file data" << "\n";
+            }
 
-			file.close();
+            file.close();
 
-			return FileReader::ReadWAV(filename);
-		}
-		catch (const std::exception& e) {
-			std::cout << "Unable to write file" << e.what() << "\n";
-		}
-	}
+            return FileReader::ReadWAV(filename);
+        }
+        catch (const std::exception& e) {
+            std::cout << "Unable to write file: " << e.what() << "\n";
+        }
+    }
 
 
     void WriteCSV(const std::string& filename, std::unordered_map<std::string, std::string>& csvMap)

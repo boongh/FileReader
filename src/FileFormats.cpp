@@ -56,6 +56,23 @@ void WAVFormat::GenerateHeader(int samplerate, int numChannel) {
 	header.bitsPerSample = 16;
 	memcpy(header.subchunk2ID, "data", 4);
 	header.subchunk2Size = data.size() * sizeof(uint16_t);
+
+	// Print all header properties
+
+	/*std::cout << "Header Properties:" << std::endl;
+	std::cout << "ChunkID: " << std::string(header.chunkID, 4) << std::endl;
+	std::cout << "Chunk Size: " << header.chunkSize << std::endl;
+	std::cout << "Format: " << std::string(header.format, 4) << std::endl;
+	std::cout << "Subchunk1 ID: " << std::string(header.subchunk1ID, 4) << std::endl;
+	std::cout << "Subchunk1 Size: " << header.subchunk1Size << std::endl;
+	std::cout << "Audio Format: " << header.audioFormat << std::endl;
+	std::cout << "Number of Channels: " << header.numChannels << std::endl;
+	std::cout << "Sample Rate: " << header.sampleRate << std::endl;
+	std::cout << "Byte Rate: " << header.byteRate << std::endl;
+	std::cout << "Block Align: " << header.blockAlign << std::endl;
+	std::cout << "Bits Per Sample: " << header.bitsPerSample << std::endl;
+	std::cout << "Subchunk2 ID: " << std::string(header.subchunk2ID, 4) << std::endl;
+	std::cout << "Subchunk2 Size: " << header.subchunk2Size << std::endl;*/
 }
 
 WAVFormat::WAVFormat() {
