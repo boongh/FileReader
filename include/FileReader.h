@@ -13,7 +13,11 @@
 
 namespace FileReader {
 	//static std::vector<unsigned char> readData(const char* filePath);
-	WAVFormat ReadWAV(const std::string& filename);
+	bool ReadWAV(const std::string& filename, WAVFormat& out);
+
+	bool ReadPPM(const std::string& filename, PPMFormat& out);
+
+	bool ReadQOI(const std::string& filename, QOIFormat& out);
 }
 
 #endif // !FILE_READER

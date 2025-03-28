@@ -142,11 +142,15 @@
     <ClInclude Include="include\FileFormats.h" />
     <ClInclude Include="include\FileReader.h" />
     <ClInclude Include="include\FileWriter.h" />
+    <ClInclude Include="src\Writer\TextWriter.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\FileFormats.cpp" />
-    <ClCompile Include="src\FileReader.cpp" />
-    <ClCompile Include="src\FileWriter.cpp" />
+    <ClCompile Include="src\FileFormatClass\QOIFormat.cpp" />
+    <ClCompile Include="src\FileFormatClass\WAVFormat.cpp" />
+    <ClCompile Include="src\Reader\PPMReader.cpp" />
+    <ClCompile Include="src\Reader\QOIReader.cpp" />
+    <ClCompile Include="src\Reader\WAVReader.cpp" />
+    <ClCompile Include="src\Writer\WAVWriter.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

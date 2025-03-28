@@ -24,15 +24,27 @@
     <ClInclude Include="include\FileWriter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Writer\TextWriter.cpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\FileReader.cpp">
+    <ClCompile Include="src\Reader\WAVReader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\FileWriter.cpp">
+    <ClCompile Include="src\Writer\WAVWriter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\FileFormats.cpp">
+    <ClCompile Include="src\FileFormatClass\WAVFormat.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Reader\PPMReader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\FileFormatClass\QOIFormat.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Reader\QOIReader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
